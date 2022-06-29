@@ -1,9 +1,10 @@
 package us.jdane.homeback.visitorlog;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/visitor-log")
@@ -17,8 +18,11 @@ public class VisitorLog {
     }
 
     @GetMapping
-    public List<Entry> getEntry() {
-        return visitorLogRepository.findAll(PageRequest.of(0, 10)).toList();
+    public Page<Entry> getEntry(
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<Integer> size
+    ) {
+        return visitorLogRepository.findAll(PageRequest.of(page.orElse(0), size.orElse(10)));
     }
 
     @PostMapping
