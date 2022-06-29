@@ -1,4 +1,4 @@
-package us.jdane.homeback;
+package us.jdane.homeback.visitorlog;
 
 import lombok.Getter;
 import lombok.Setter;
